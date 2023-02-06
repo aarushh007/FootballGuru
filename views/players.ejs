@@ -1,0 +1,165 @@
+<%- include('./partials/header.ejs') %>
+<body>
+<main>
+ <div class="">
+   <h1>Players</h1>
+    <p>Page: <a href="?page=1">1</a> <a href="?page=2">2</a> <a href="?page=3">3</a> <a href="?page=4">4</a> <a href="?page=5">5</a></p>
+
+     <div class='main-container'>
+         <table>
+         <tr>
+             <th class='th-rating'>Rating</th>
+             <th></th>
+             <th>Name</th>
+             <th>POS</th>
+             <th>PAC</th>
+             <th>SHO</th>
+             <th>PAS</th>
+             <th>DRI</th>
+             <th>DEF</th>
+             <th>PHY</th>
+         </tr>
+         <% for (var i = 0; i < players.length; i++) { %>
+             <tr class='player'>
+                 <td><div class='player-rating'><span ><%= players[i].rating %></span></div></td>
+                 <td class='player-image-td'><img class='player-image' src=<%= players[i].image %> /></td>
+                 <td><div class='player-info'>
+                     <div class='player-badges'>
+                         <img class='player-country' src=<%= players[i].country %> />
+                         <img class='player-club' src=<%= players[i].clubImg %> />
+                     </div>
+                     <div>
+                         <span><strong><%= players[i].name %></strong></span>
+                         <span><%= players[i].club %> | <%= players[i].league %></span>
+                     </div>
+                 </div></td>
+                 <td><span class='player-position'><%= players[i].position %></span></td>
+                 <td><div class='player-stat'><span><%= players[i].PAC %></span></div></td>
+                 <td><div class='player-stat'><span><%= players[i].SHO %></span></div></td>
+                 <td><div class='player-stat'><span><%= players[i].PAS %></span></div></td>
+                 <td><div class='player-stat'><span><%= players[i].DRI %></span></div></td>
+                 <td><div class='player-stat'><span><%= players[i].DEF %></span></div></td>
+                 <td><div class='player-stat'><span><%= players[i].PHY %></span></div></td>
+            </tr>
+         <% } %>
+             </table>
+     </div>
+ </div>
+</main>
+
+<script>
+    var stats = document.querySelectorAll('.player-stat')
+    for(let i=0; i<stats.length; i++){
+        if(parseInt(stats[i].querySelector('span').innerText) > 80){
+            stats[i].classList.add('dark-green')
+        } else if(parseInt(stats[i].querySelector('span').innerText) > 70){
+            stats[i].classList.add('green')
+        } else if (parseInt(stats[i].querySelector('span').innerText) > 50){
+            stats[i].classList.add('orange')
+        } else {
+            stats[i].classList.add('red')
+        }
+    }
+</script>
+<style>
+    .player-image {
+        max-width: 60px;
+        transition: .3s;
+    }
+    .player-image-td {
+        width: 90px;
+    }
+    .player-info {
+        display: flex;
+        gap: 5px;
+        margin-right: 30px;
+        font-size: 18px;
+    }
+    .player-position{
+        margin: 0 30px;
+    }
+    .player-info div{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    .player-info img{
+        max-width: 27px;
+    }
+    .player-rating {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 30px;
+        width: 30px;
+        margin: auto;
+        background: linear-gradient(135deg, #161D76, #FDFCFA);
+        color: white;
+        font-weight: 600;
+        font-size: 18px;
+        border-radius: 5px;
+        border: solid 1px #161D76;
+        transition: 0.3s;
+    }
+    .player-stat {
+        margin: auto;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        font-size: 16px;
+        margin: 0 10px;
+        transition: 0.3s;
+        
+    }
+    .player-stat.dark-green{
+        border: solid 1px green;
+        box-shadow: 0px 0px 10px green;
+        color: green;
+    }
+    .player-stat.green{
+        border: solid 1px limegreen;
+        box-shadow: 0px 0px 10px limegreen;
+        color: limegreen;
+    }
+    .player-stat.orange{
+        border: solid 1px orange;
+        box-shadow: 0px 0px 10px orange;
+        color: orange;
+    }
+    .player-stat.red{
+        border: solid 1px red;
+        box-shadow: 0px 0px 10px red;
+        color: red;
+    }
+    th {
+        text-align: center;
+        font-weight: 600;
+    }
+    th.th-rating {
+        text-align: left;
+    }
+    table {
+        font-size: 20px;
+    }
+    tr {
+        transition: 0.2s;
+    }
+    tr:hover {
+        color: darkblue;
+        cursor: pointer;
+    }
+    tr:hover .player-image {
+        max-width: 85px;
+    }
+    tr:hover .player-rating {
+        height: 35px;
+        width: 35px;
+        font-size: 20px;
+        background: linear-gradient(135deg, #161D76, #161D76);
+    }
+</style>
+</body> 
+</html>
